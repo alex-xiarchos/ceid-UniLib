@@ -1,6 +1,6 @@
 # UniLib
 
-<img src="https://github.com/TehWinnerGR/UniLib/blob/main/UniLib_logo.png" width="510" height="500">
+<img src="https://github.com/TehWinnerGR/UniLib/blob/main/UniLib_logo.png" width="310" height="300">
 
 Software Engineering Project 2020-2021
 of Computer Engineering and Informatics Department, University of Patras
