@@ -16,8 +16,8 @@ public class RewardsPoints {
     /* Συνάρτηση που υπολογίζει το πλήθος των ημερών επέκτασης που δικαιούται
     ο χρήστης βάσει των πόντων επιβράβευσής του. Ισχύει: 10 πόντοι = 1 ημέρα. */
 
-    public int pointsToDays(int mypoints) {
-        int days = mypoints/10;
+    public int pointsToDays() {
+        int days = points/10;
         return days;
     }
 }
