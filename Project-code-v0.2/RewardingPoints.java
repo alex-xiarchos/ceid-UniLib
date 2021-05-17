@@ -1,7 +1,7 @@
-public class RewardsPoints {
+public class RewardingPoints {
     private int points;
 
-    public RewardsPoints(int points) {
+    public RewardingPoints(int points) {
         this.points = points;
     }
 
