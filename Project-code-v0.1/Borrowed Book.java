@@ -1,4 +1,5 @@
 import java.util.*;
+import java.text.SimpleDateFormat;
 
 public class BorrowedBook extends book{
 
@@ -49,4 +50,14 @@ public class BorrowedBook extends book{
     public void setBorrowExpireDate(Date borrow_expire_date){
         this.borrow_expire_date = borrow_expire_date;
     }*/
+
+    /* Συνάρτηση που επεκτείνει την ημερομηνία λήξης
+    του δανεισμού ενός βιβλίου κατά έναν αριθμό ημερών. */
+
+    public void expandExpireDate(int days) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(borrow_expire_date);
+        c.add(Calendar.DAY_OF_MONTH, days);
+        borrow_expire_date = c.getTime();
+    }
 }
