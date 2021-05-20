@@ -3,6 +3,14 @@ public class Book {
 	private String type;
 	private String author;
 	private String publisher;
+
+	public Book(String idBook, String type, String author, String publisher){
+		this.idBook = idBook;
+		this.type = type;
+		this.author = author;
+		this.publisher = publisher;
+	}
+
 	public String getIdBook() {
 		return idBook;
 	}
@@ -33,6 +41,11 @@ public class Book {
 	public String toString() {
 		return "Book [idBook=" + idBook + ", type=" + type + ", author="
 				+ author + ", publisher=" + publisher + "]";
+	}
+
+	public String[] getInfo(){
+		String[] array = new String[] {this.idBook, this.type, this.author, this.publisher};
+		return array;
 	}
 
 }
