@@ -15,7 +15,7 @@ public class Book {
 		this.details = details;
 	}
 
-	/* GETTERS & SETTERS
+	/* GETTERS & SETTERS */
 	public String getTitle() {
 		return title;
 	}
@@ -47,7 +47,10 @@ public class Book {
 	public void setPublishingHouse(String publishing_house) {
 		this.publishing_house = publishing_house;
 	}
-	*/
+
+	public String getISBN() {
+		return ISBN;
+	}
 
 	public String[] getInfo(){
 		String[] array = new String[] {this.title, this.category, this.author, this.publishing_house, this.ISBN, this.details};
