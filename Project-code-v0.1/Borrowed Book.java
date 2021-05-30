@@ -1,13 +1,13 @@
 import java.util.*;
 import java.text.SimpleDateFormat;
 
-public class BorrowedBook extends book{
+public class BorrowedBook extends Book{
 
-    private int user;
+    private User user;
     private Date borrow_start_date, borrow_expire_date;
 	    
-    public BorrowedBook(String idBook,/* String type, String author, String publisher,*/ int user){  
-        super(idBook/*, type, author, publisher*/);
+    public BorrowedBook(String title, String category, String author, String publishing_house, String ISBN, String details, User user) {  
+        super(title, category, author, publishing_house, ISBN, details);
         this.user = user;  
         this.borrow_start_date = new Date();
 

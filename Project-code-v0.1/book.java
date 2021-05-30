@@ -1,50 +1,56 @@
 public class Book {
-	private String idBook;
-	private String type;
+	private String title;
+	private String category;
 	private String author;
-	private String publisher;
+	private String publishing_house;
+	private String ISBN;
+	private String details;
 
-	public Book(String idBook, String type, String author, String publisher){
-		this.idBook = idBook;
-		this.type = type;
+	public Book(String title, String category, String author, String publishing_house, String ISBN, String details){
+		this.title = title;
+		this.category = category;
 		this.author = author;
-		this.publisher = publisher;
+		this.publishing_house = publishing_house;
+		this.ISBN = ISBN;
+		this.details = details;
 	}
 
-	public String getIdBook() {
-		return idBook;
+	/* GETTERS & SETTERS
+	public String getTitle() {
+		return title;
 	}
-	public void setIdBook(String idBook) {
-		this.idBook = idBook;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getType() {
-		return type;
+
+	public String getCategory() {
+		return category;
 	}
-	public void setType(String type) {
-		this.type = type;
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
+
 	public String getAuthor() {
 		return author;
 	}
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getPublisher() {
-		return publisher;
-	}
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+
+	public String getPublishingHouse() {
+		return publishing_house;
 	}
 
-
-
-	public String toString() {
-		return "Book [idBook=" + idBook + ", type=" + type + ", author="
-				+ author + ", publisher=" + publisher + "]";
+	public void setPublishingHouse(String publishing_house) {
+		this.publishing_house = publishing_house;
 	}
+	*/
 
 	public String[] getInfo(){
-		String[] array = new String[] {this.idBook, this.type, this.author, this.publisher};
+		String[] array = new String[] {this.title, this.category, this.author, this.publishing_house, this.ISBN, this.details};
 		return array;
 	}
 

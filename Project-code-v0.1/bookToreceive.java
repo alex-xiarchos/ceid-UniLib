@@ -1,41 +1,42 @@
 import java.util.*;
 
-class bookToreceive extends book
+class BookToReceive extends Book
 {
-    private User User;
+    private User user;
     private Date pickup_date_expired;
     private PIN bookToreceive_pin;
-public bookToreceive(String idBook,String type,String author,String publisher,User user)
-{
-    super(idBook, type, author, publisher);
-    this.user = user;
 
-    this.bookToreceive_pin = PIN.generator_PIN();
-
-    this.pickup_date_expired = new Date();
-
-    Calendar c = Calendar.getInstance();
-    
-    this.pickup_date_expired = c.geTime();
-}
-
-    public User getUser(){
-        return user;
-    }
-
-    public Date getPickupDateExpired()
+    public BookToReceive(String title, String category, String author, String publishing_house, String ISBN, String details, User user)
     {
-        return pickup_date_expired;
+        super(title, category, author, publishing_house, ISBN, details);
+        this.user = user;
+
+        this.bookToreceive_pin = PIN.generator_PIN();
+
+        this.pickup_date_expired = new Date();
+
+        Calendar c = Calendar.getInstance();
+        
+        this.pickup_date_expired = c.getTime();
     }
 
-    public int getBookToReceivePin()
-    {
-        return bookToreceive_pin;
-    }
+        public User getUser(){
+            return user;
+        }
 
-    public String getDetails()
-    {
-        return("\nUser name: " +this.user.getuName()+"\nPIN: " +this.bookToreceive_pin + "\nPickup Date Expired: "+this.pickup_date_expired); 
-    }
+        public Date getPickupDateExpired()
+        {
+            return pickup_date_expired;
+        }
+
+        public int getBookToReceivePin()
+        {
+            return bookToreceive_pin;
+        }
+
+        public String getDetails()
+        {
+            return("\nUser name: " +this.user.getuName()+"\nPIN: " +this.bookToreceive_pin + "\nPickup Date Expired: "+this.pickup_date_expired); 
+        }
 
 }

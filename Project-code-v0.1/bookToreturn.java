@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 
 class BookToReturn extends Book
 {
-    private User User;
+    private User user;
     private Date return_date;
     private PIN bookToreturn_pin;
 
-    public bookToreturn(String idBook,String type,String author,String publisher,User user)
+    public BookToReturn(String title, String category, String author, String publishing_house, String ISBN, String details, User user)
     {
-        super(idBook, type, author, publisher);
+        super(title, category, author, publishing_house, ISBN, details);
         this.user = user;
 
         this.bookToreturn_pin = PIN.generator_PIN();
