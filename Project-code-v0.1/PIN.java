@@ -1,9 +1,4 @@
 import java.util.*;
-class InvalidPin extends exception{
-    public InvalidPin(String s){
-        super(s);
-    }
-}
 
 class PIN
 {
