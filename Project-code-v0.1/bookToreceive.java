@@ -6,7 +6,7 @@ class BookToReceive extends Book
     private Date pickup_date_expired;
     private PIN bookToreceive_pin;
 
-    public BookToReceive(String title, String category, String author, String publishing_house, String ISBN, String details, User user)
+    public BookToReceive(String title, String category, String author, String publishing_house, String ISBN, String details, User user) throw FailBorrowException
     {
         super(title, category, author, publishing_house, ISBN, details);
         this.user = user;

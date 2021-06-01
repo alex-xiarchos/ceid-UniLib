@@ -12,6 +12,9 @@ public class RewardingPoints {
     public void setPoints(int RenewedPoints) {
         points = RenewedPoints;
     }
+    public int addPoints(int allpoints){
+        allpoints = points +RenewedPoints;
+    }
 
     /* Συνάρτηση που υπολογίζει το πλήθος των ημερών επέκτασης που δικαιούται
     ο χρήστης βάσει των πόντων επιβράβευσής του. Ισχύει: 10 πόντοι = 1 ημέρα. */

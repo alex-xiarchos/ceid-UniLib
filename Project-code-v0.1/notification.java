@@ -1,3 +1,9 @@
+
+class NoReceiver extends Exception{
+	public NoReceiver(String s){
+		super(s);
+	}
+}
 public class notification{
 
 	public String sender;
@@ -11,9 +17,14 @@ public class notification{
 	public void set_sender(String sender){
 		this.sender = sender;
 	}
-	public String get_receiver(){
-		return receiver;
-	}
+	public String get_receiver() throw NoReceiver{
+		boolean flag = false;
+		if (!flag){
+			throw new NoReceiver("No Receiver Found");
+		}
+		else{
+            return receiver;
+	     }
 	public void set_receiver(String receiver){
 		this.receiver = receiver;
 	}
