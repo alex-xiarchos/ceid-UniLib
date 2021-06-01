@@ -1,5 +1,6 @@
 public class RewardingPoints {
     private int points;
+    private int allpoints;
 
     public RewardingPoints(int points) {
         this.points = points;
