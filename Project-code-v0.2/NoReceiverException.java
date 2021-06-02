@@ -1,5 +1,8 @@
- public class NoReceiver extends Exception{
-    public NoReceiver(String s){
+ public class NoReceiverException extends Exception{
+    public NoReceiverException() {}
+    
+    public NoReceiverException(String s){
         super(s);
+        System.out.println(s);
     }
 }

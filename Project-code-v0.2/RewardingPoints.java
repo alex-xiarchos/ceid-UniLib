@@ -13,8 +13,9 @@ public class RewardingPoints {
     public void setPoints(int RenewedPoints) {
         points = RenewedPoints;
     }
-    public int addPoints(int allpoints){
-        allpoints = points +RenewedPoints;
+
+    public void addPoints(int newpoints){
+        points += newpoints;
     }
 
     /* Συνάρτηση που υπολογίζει το πλήθος των ημερών επέκτασης που δικαιούται
