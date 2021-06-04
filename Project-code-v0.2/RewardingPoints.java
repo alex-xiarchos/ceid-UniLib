@@ -1,3 +1,6 @@
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 public class RewardingPoints {
     private int points;
     private int allpoints;
@@ -16,6 +19,15 @@ public class RewardingPoints {
 
     public void addPoints(int newpoints){
         points += newpoints;
+    }
+
+    //Προσθήκη ή αφαίρεση πόντων ανάλογα με την σύγκριση ημερομηνίας επιστροφής και ημερομηνίας λήξης του δανεισμού
+    //Θα χρειαστεί μάλλον με κάποιον τρόπο να γίνεται η σύνδεση points με Αccount.
+    public void addremPoints(BookToReturn book){
+        Date now = new Date();
+        long diff = TimeUnit.MILLISECONDS.toDays(now.getTime() - book.getReturnDate().getTime());
+        
+        this.points = this.points + (int)diff/10;   //Δεν ήξερα ακριβώς με ποιον τρόπο είπαμε να υπολογίζουμε τους πόντους.
     }
 
     /* Συνάρτηση που υπολογίζει το πλήθος των ημερών επέκτασης που δικαιούται
