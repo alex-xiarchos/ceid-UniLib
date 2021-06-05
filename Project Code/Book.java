@@ -62,11 +62,11 @@ public class Book {
         return book_copies;
     }
 
-    public void bookGetsReturned() {
+    public void aBookIsReturned() {
         book_copies += 1;
     }
 
-    public void bookGetsBorrowed() {
+    public void aBookIsBorrowed() {
         book_copies -= 1;
     }
 }

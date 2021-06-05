@@ -23,16 +23,20 @@ public class UniLib {
 
     public static void borrowBook(Book book, UserAccount account) throws FailBorrowException{
         if (account.getBorrowBooks() < 5 && book.getBook_copies() > 0) {
-            System.out.println("You can borrow.");
 
             BorrowedBook mybook1 = new BorrowedBook(book, account.getUser());
-            book.bookGetsBorrowed();
-            account.addBorrowedBook(mybook1);
 
-            System.out.println(account.getMyBooksList().get(0).getTitle());
+            book.aBookIsBorrowed();             //book copy reduced by 1
+            account.newBorrowedBook(mybook1);   //borrowed book added to account list - borrow limit reduced by 1
+
         }
         else
             throw new FailBorrowException("You can't borrow");
 
+    }
+
+    public static void returnBook(BorrowedBook book, UserAccount account) {
+        book.aBookIsReturned();                 //book copy added by 1
+        account.newReturnedBook(book);          //borrowed book removed from account list - borrow limited added by 1
     }
 }

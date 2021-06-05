@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class UserAccount {
     private boolean active = true;
-    private int number_of_borrowed_books = 0;
-    private int number_of_reserved_books = 0;
+    private int borrowedBooks = 0;
+    private int reservedBooks = 0;
     private int fine_number = 0;
     private User user;
     private ArrayList<BorrowedBook> mybookslist = new ArrayList<BorrowedBook>(5);
@@ -17,32 +17,27 @@ public class UserAccount {
         return mybookslist;
     }
 
-    public void addBorrowedBook(BorrowedBook b) {
-        mybookslist.add(b);
-    }
-
-    public void removeBorrowedBook(BorrowedBook b) {
-        mybookslist.remove(b);
-    }
 
     public void setActive(boolean isActive) {
         active = isActive;
     }
 
     public int getBorrowBooks() {
-        return number_of_borrowed_books;
-    }
-
-    public void setBorrowBooks(int BorrowedBooks) {
-        number_of_borrowed_books = BorrowedBooks;
+        return borrowedBooks;
     }
 
     public int getReserveBooks() {
-        return number_of_reserved_books;
+        return reservedBooks;
     }
 
-    public void setReserveBooks(int ReservedBooks) {
-        number_of_reserved_books = ReservedBooks;
+    public void newBorrowedBook(BorrowedBook book) {
+        borrowedBooks += 1;
+        mybookslist.add(book);
+    }
+
+    public void newReturnedBook(BorrowedBook book) {
+        borrowedBooks -= 1;
+        mybookslist.remove(book);
     }
 
     public int getFine() {
