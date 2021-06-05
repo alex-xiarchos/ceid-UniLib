@@ -13,6 +13,12 @@ public class UniLib {
         patraLibrary.addBook(book1);
         patraLibrary.addBook(book2);
 
+        /* Έλεγχος λειτουργικότητας συνάρτησης getInfo() */
+        String[] bookinfo1 = book1.getInfo();
+        for (int i = 0; i < bookinfo1.length; i++) {
+            System.out.println(bookinfo1[i]);
+        }
+
         UserAccount account = new UserAccount(ceidStudent);
 
         try {

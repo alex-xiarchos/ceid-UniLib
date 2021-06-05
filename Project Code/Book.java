@@ -69,4 +69,9 @@ public class Book {
     public void aBookIsBorrowed() {
         book_copies -= 1;
     }
+
+    public String[] getInfo(){
+		String[] array = new String[] {this.title, this.category, this.author, this.publishing_house, this.ISBN, this.details, String.valueOf(this.book_copies)};
+		return array;
+	}
 }
