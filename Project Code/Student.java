@@ -2,12 +2,13 @@ public class Student extends User {
     private int student_id;
     private String department;
     private int academic_year;
+    private User user;
 
-    public Student(String student_name, String student_password, String student_email, int student_id, String department, int academic_year) {
-        super(student_name, student_password, student_email);
+    public Student(String user_name, String user_email, String user_password, int student_id, String department, int academic_year) {
+        super(user_name, user_email, user_password);
         this.student_id = student_id;
         this.department = department;
-        this. academic_year = academic_year;
+        this.academic_year = academic_year;
     }
 
     public int getStudentId() {

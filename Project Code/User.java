@@ -3,7 +3,7 @@ abstract class User {
     private String user_password;
     private String user_email;
 
-    public User(String user_name, String user_password, String user_email){
+    public User(String user_name, String user_email, String user_password){
         this.user_name = user_name;
         this.user_password = user_password;
         this.user_email = user_email;
