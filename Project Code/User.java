@@ -17,7 +17,7 @@ abstract class User {
         return user_password;
     }
 
-    public String getuEmail() {
+    public String getEmail() {
         return user_email;
     }
 }
