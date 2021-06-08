@@ -30,39 +30,75 @@ public class BookLibrary {
 		library.remove(b);
 	}
 
-	public Book getBookByTitle(String book_title) throws SearchWarningException {
-		for (int i = 0; i < library.size(); i++) {
-            if (library.get(i).getTitle() == book_title) {
-                return library.get(i);
-            }
-        }
-		throw new SearchWarningException("No book with title: " + book_title + " was found.");
+	public ArrayList<Book> getLibrary() {
+		return library;
 	}
 
-	public Book getBookByAuthor(String book_author) throws SearchWarningException {
+	public ArrayList<Book> getBooksByTitle(String book_title) throws SearchWarningException {
+		ArrayList<Book> booksByTitle = new ArrayList<Book>();
+		boolean flag = false;
 		for (int i = 0; i < library.size(); i++) {
-            if (library.get(i).getAuthor() == book_author) {
-                return library.get(i);
+            if (library.get(i).getTitle().contains(book_title)) {
+                booksByTitle.add(library.get(i));
+                flag = true;
             }
         }
-		throw new SearchWarningException("No book with author: " + book_author + " was found.");
+		if (flag == true) {
+			return booksByTitle;
+		}
+		else {
+			throw new SearchWarningException();
+		}
 	}
 
-	public Book getBookByPublisher(String book_publisher) throws SearchWarningException {
+	public ArrayList<Book> getBooksByAuthor(String book_author) throws SearchWarningException {
+		ArrayList<Book> booksByAuthor = new ArrayList<Book>();
+		boolean flag = false;
 		for (int i = 0; i < library.size(); i++) {
-            if (library.get(i).getPublishingHouse() == book_publisher) {
-                return library.get(i);
+            if (library.get(i).getAuthor().contains(book_author)) {
+                booksByAuthor.add(library.get(i));
+                flag = true;
             }
         }
-		throw new SearchWarningException("No book from publishing house: " + book_publisher + " was found.");
+		if (flag == true) {
+			return booksByAuthor;
+		}
+		else {
+			throw new SearchWarningException();
+		}
 	}
 
-	public Book getBookByISBN(String book_isbn) throws SearchWarningException {
+	public ArrayList<Book> getBooksByPublisher(String book_publisher) throws SearchWarningException {
+		ArrayList<Book> booksByPublisher = new ArrayList<Book>();
+		boolean flag = false;
 		for (int i = 0; i < library.size(); i++) {
-            if (library.get(i).getISBN() == book_isbn) {
-                return library.get(i);
+            if (library.get(i).getPublishingHouse().contains(book_publisher)) {
+                booksByPublisher.add(library.get(i));
+                flag = true;
             }
         }
-		throw new SearchWarningException("No book with ISBN: " + book_isbn + " was found.");
+		if (flag == true) {
+			return booksByPublisher;
+		}
+		else {
+			throw new SearchWarningException();
+		}
+	}
+
+	public ArrayList<Book> getBooksByISBN(String book_isbn) throws SearchWarningException {
+		ArrayList<Book> booksByISBN = new ArrayList<Book>();
+		boolean flag = false;
+		for (int i = 0; i < library.size(); i++) {
+            if (library.get(i).getISBN().contains(book_isbn)) {
+                booksByISBN.add(library.get(i));
+                flag = true;
+            }
+        }
+		if (flag == true) {
+			return booksByISBN;
+		}
+		else {
+			throw new SearchWarningException();
+		}
 	}
 }

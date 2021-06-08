@@ -70,6 +70,10 @@ public class Book {
         book_copies -= 1;
     }
 
+    public void setCopies(int copies) {
+        book_copies += copies;
+    }
+
     public String[] getInfo(){
 		String[] array = new String[] {this.title, this.category, this.author, this.publishing_house, this.ISBN, this.details, String.valueOf(this.book_copies)};
 		return array;
