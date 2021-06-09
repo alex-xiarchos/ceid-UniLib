@@ -9,8 +9,18 @@ public class UserAccount {
     private ArrayList<BorrowedBook> mybookslist = new ArrayList<BorrowedBook>(5);
 
 
-    public UserAccount(User user) {
-        this.user = user;
+    public UserAccount(String[] userInfo) {
+
+        /*  Αυτόματη δημιουργία είτε Student, είτε Staff με βάση τις πληροφορίες του userInfo και αποθήκευση 
+            στο αντικείμενο user του userAccount */
+        if(Integer.parseInt(userInfo[6]) == 1){
+            Student student = new Student(userInfo[0], userInfo[1], userInfo[2], Integer.parseInt(userInfo[3]), userInfo[4], Integer.parseInt(userInfo[5]));
+            this.user = student;
+        }
+        else if(Integer.parseInt(userInfo[6]) == 2){
+            UniStaff unistaff = new UniStaff(userInfo[0], userInfo[1], userInfo[2], Integer.parseInt(userInfo[3]), userInfo[4]); // Δημιουργία ενός νέου Unistaff
+            this.user = unistaff;
+        }
     }
 
     public ArrayList<BorrowedBook> getMyBooksList() {

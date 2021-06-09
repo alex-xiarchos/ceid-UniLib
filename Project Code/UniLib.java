@@ -1,13 +1,14 @@
 import java.util.*;
 public class UniLib {
-    private static ArrayList<User> userlist = new ArrayList<User>();
+    private static ArrayList<UserAccount> useraccountlist = new ArrayList<UserAccount>();
     private static ArrayList<Administrator> adminlist = new ArrayList<Administrator>();
 
     public static void main(String args[]) {
         Administrator admin = new Administrator("Ρουμελιώτης Κωνσταντίνος", "roumeliotis@upatras.gr", "roum12");
         adminlist.add(admin);
-        Student ceidStudent = new Student("Νικηφόρος Παπαγεωργίου", "st1059633@ceid.upatras.gr", "nik23", 1059633, "CEID", 4);
-        userlist.add(ceidStudent);
+        String[] array = new String[] {"Νικηφόρος Παπαγεωργίου", "st1059633@ceid.upatras.gr", "nik23", String.valueOf(1059633), "CEID", String.valueOf(4), String.valueOf(1)};
+        UserAccount ceidStudent = new UserAccount(array);
+        useraccountlist.add(ceidStudent);
 
         Book book1 = new Book("Ψηφιακή Επεξεργασία Σήματος", "Πληροφορική", "Νικόλαος Λάσκαρης", "Συμμετρία", "978-960-110-034-0", "Βασικές έννοιες της ψηφιακής επεξεργασίας σημάτων.", 2);
         Book book2 = new Book("Ψηφιακή Επεξεργασία Σημάτων Ι", "Πληροφορική", "Θάνος Στουραΐτης", "Πανεπιστήμιο Πατρών", "978-560-155-2", "Άλλο ένα βιβλίο ΨΕΣ.", 8);
@@ -108,8 +109,8 @@ public class UniLib {
         } while (true);
 
 
-/*        for (int i = 0; i < userlist.size(); i++) {1
-            System.out.println(userlist.get(i).getName());
+/*        for (int i = 0; i < useraccountlist.size(); i++) {1
+            System.out.println(useraccountlist.get(i).getUser().getName());
         }
 */
 
@@ -153,10 +154,10 @@ public class UniLib {
         Scanner input_email = new Scanner(System.in);
         System.out.println("\nΔώσε το email σου");
         String email = input_email.nextLine();
-        /* Σαρώνουμε την userlist για να δούμε αν υπάρχει ήδη εγγεγραμμένος χρήστης
+        /* Σαρώνουμε την useraccountlist για να δούμε αν υπάρχει ήδη εγγεγραμμένος χρήστης
            στο σύστημα με το ίδιο email. Σε περίπτωση που υπάρχει, εγείρεται εξαίρεση. */
-        for (int i = 0; i < userlist.size(); i++) {
-            if (userlist.get(i).getEmail().equals(email)) {
+        for (int i = 0; i < useraccountlist.size(); i++) {
+            if (useraccountlist.get(i).getUser().getEmail().equals(email)) {
                 throw new AlreadyUsedAccountException("Το email αντιστοιχεί σε ήδη εγγεγραμμένο χρήστη");
             }
         }
@@ -182,14 +183,19 @@ public class UniLib {
         System.out.println("\nΔώσε το Τμήμα σου");
         String department = input_department.nextLine();
 
+        // Αποθήκευση των στοιχείων στην userInfo (μαζί με το choice).
         if (choice == 1) {
-            Student student = new Student(name, email, password, id, department, year); // Δημιουργία ενός νέου Student
-            userlist.add(student); // Προσθήκη του χρήστη στην userlist του συστήματος
+            String[] userInfo = new String[] {name, email, password, String.valueOf(id), department, String.valueOf(year), String.valueOf(choice)};
+            UserAccount account = new UserAccount(userInfo); // Δημιουργία ενός νέου Account και αυτόματα user μέσω αυτού.
+            useraccountlist.add(account); // Προσθήκη του λογαριασμού στην useraccountlist του συστήματος
+        }else if (choice == 2) {
+            String[] userInfo = new String[] {name, email, password, String.valueOf(id), department, String.valueOf(0), String.valueOf(choice)};
+            UserAccount account = new UserAccount(userInfo); // Δημιουργία ενός νέου Account και αυτόματα user μέσω αυτού.
+            useraccountlist.add(account); // Προσθήκη του λογαριασμού στην useraccountlist του συστήματος
         }
-        else if (choice == 2) {
-            UniStaff unistaff = new UniStaff(name, email, password, id, department); // Δημιουργία ενός νέου Unistaff
-            userlist.add(unistaff); // Προσθήκη του χρήστη στην userlist του συστήματος
-        }
+
+
+        //System.out.println(useraccountlist);  // Εκτύπωση του περιεχομένου του useraccountlist για λόγους debbuging.
 
         return choice;
     }
@@ -208,8 +214,8 @@ public class UniLib {
 
         //boolean loginFlag = false;
 
-        for (int i = 0; i < userlist.size(); i++) {
-            if (email.equals(userlist.get(i).getEmail()) && password.equals(userlist.get(i).getPassword())) {
+        for (int i = 0; i < useraccountlist.size(); i++) {
+            if (email.equals(useraccountlist.get(i).getUser().getEmail()) && password.equals(useraccountlist.get(i).getUser().getPassword())) {
                 System.out.println("\nΕπιτυχής σύνδεση χρήστη!");
                 //loginFlag = true;
                 return 1;
