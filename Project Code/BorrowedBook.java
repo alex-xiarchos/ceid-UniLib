@@ -11,6 +11,7 @@ public class BorrowedBook extends Book {
         this.user = user;
         this.borrow_start_date = new Date();
 
+        // Αυτόματος ορισμός ημερομηνίας λήξης του Δανεισμού του βιβλίου 15 μέρες μετά το ξεκίνημα του δανεισμού.
         Calendar c = Calendar.getInstance();
         c.setTime(borrow_start_date);
         c.add(Calendar.DATE, 15);
