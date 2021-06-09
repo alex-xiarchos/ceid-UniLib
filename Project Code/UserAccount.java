@@ -6,11 +6,13 @@ public class UserAccount {
     private int reservedBooks = 0;
     private int fine_number = 0;
     private User user;
+    private RewardingPoints userPoints;
+    private WishList userWishList;
+    private ArrayList<Notification> notificationslist = new ArrayList<Notification>();
     private ArrayList<BorrowedBook> mybookslist = new ArrayList<BorrowedBook>(5);
 
 
     public UserAccount(String[] userInfo) {
-
         /*  Αυτόματη δημιουργία είτε Student, είτε Staff με βάση τις πληροφορίες του userInfo και αποθήκευση 
             στο αντικείμενο user του userAccount */
         if(Integer.parseInt(userInfo[6]) == 1){
@@ -21,10 +23,10 @@ public class UserAccount {
             UniStaff unistaff = new UniStaff(userInfo[0], userInfo[1], userInfo[2], Integer.parseInt(userInfo[3]), userInfo[4]); // Δημιουργία ενός νέου Unistaff
             this.user = unistaff;
         }
-    }
-
-    public ArrayList<BorrowedBook> getMyBooksList() {
-        return mybookslist;
+        RewardingPoints points = new RewardingPoints();
+        this.userPoints = points;
+        WishList wishlist = new WishList();
+        this.userWishList = wishlist;
     }
 
 
@@ -60,5 +62,13 @@ public class UserAccount {
 
     public User getUser() {
         return user;
+    }
+
+    public WishList getWishList() {
+        return userWishList;
+    }
+
+    public ArrayList<BorrowedBook> getMyBooks() {
+        return mybookslist;
     }
 }
