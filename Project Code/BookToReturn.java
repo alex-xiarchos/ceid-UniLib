@@ -32,15 +32,16 @@ public class BookToReturn extends Book {
     public PIN getBookToReturnPin() {
         return bookToreturn_pin;
     }
-    /*
+
     public boolean cmpReturnWithCurrentDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  
-        Date date = new Date();
-        Date currdate = formatter.parse(toString(date));
+        Date currdate = new Date();
+        Calendar c = Calendar.getInstance();
+        currdate = c.getTime();
         if (currdate.compareTo(return_date) == -1) {
             return false;
         }
-        else return true;
+        else {
+            return true;
+        }
     }
-    */
 }

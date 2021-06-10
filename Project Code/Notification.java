@@ -1,10 +1,18 @@
+import java.util.*;
 
 public class Notification {
 
-    public String sender;
-    public String receiver;
-    public String message;
-    public String send_date;
+    private String sender;
+    private String receiver;
+    private String message;
+    private Date send_date;
+
+    public Notification(String sender, String receiver, String message) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.message = message;
+        send_date = new Date();
+    }
 
     public String getSender() {
         return sender;
@@ -26,7 +34,7 @@ public class Notification {
         return message;
     }
 
-    public String getSendDate() {
+    public Date getSendDate() {
         return send_date;
     }
 

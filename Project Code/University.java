@@ -3,7 +3,7 @@ public class University {
     private String address;
     private String telephone_number;
 
-    public String get_university_name() {
+    public String getUniversityName() {
         return university_name;
     }
 
@@ -19,7 +19,7 @@ public class University {
         return telephone_number;
     }
 
-    public void set_telephone_number(String telephone_number) {
+    public void setTelephoneNumber(String telephone_number) {
         this.telephone_number = telephone_number;
     }
 
