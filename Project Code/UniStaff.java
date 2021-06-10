@@ -7,4 +7,12 @@ public class UniStaff extends User {
         this.staff_id = staff_id;
         this.department = department;
     }
+
+    public int getStaffId() {
+        return staff_id;
+    }
+
+    public String getStaffDepartment() {
+        return department;
+    }
 }

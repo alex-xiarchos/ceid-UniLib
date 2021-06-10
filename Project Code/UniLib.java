@@ -3,7 +3,7 @@ public class UniLib {
     private static ArrayList<UserAccount> useraccountlist = new ArrayList<UserAccount>();
     private static ArrayList<Administrator> adminlist = new ArrayList<Administrator>();
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Administrator admin = new Administrator("Ρουμελιώτης Κωνσταντίνος", "roumeliotis@upatras.gr", "roum12");
         adminlist.add(admin);
         String[] array = new String[] {"Νικηφόρος Παπαγεωργίου", "st1059633@ceid.upatras.gr", "nik23", String.valueOf(1059633), "CEID", String.valueOf(4), String.valueOf(1)};
@@ -13,18 +13,26 @@ public class UniLib {
         Book book1 = new Book("Ψηφιακή Επεξεργασία Σήματος", "Πληροφορική", "Νικόλαος Λάσκαρης", "Συμμετρία", "978-960-110-034-0", "Βασικές έννοιες της ψηφιακής επεξεργασίας σημάτων.", 2);
         Book book2 = new Book("Ψηφιακή Επεξεργασία Σημάτων Ι", "Πληροφορική", "Θάνος Στουραΐτης", "Πανεπιστήμιο Πατρών", "978-560-155-2", "Άλλο ένα βιβλίο ΨΕΣ.", 8);
         Book book3 = new Book("Βασικές αρχές Τεχνολογίας Λογισμικού", "Πληροφορική", "Ian Sommerville", "Κλειδάριθμος", "978-960-461-220-8", "Βιβλίο Τεχνολογίας Λογισμικού", 5);
-        Book book4 = new Book("Εισαγωγή στην Java", "Πληροφορική", "Γιώργος Λιακέας", "Κλειδάριθμος", "978-960-461-169-0", "Ένας ολοκληρωμένος και εύχρηστος οδηγός της γλώσσας Java", 0);
+        Book book4 = new Book("Εισαγωγή στην Java", "Πληροφορική", "Γιώργος Λιακέας", "Κλειδάριθμος", "978-960-461-169-0", "Ένας ολοκληρωμένος και εύχρηστος οδηγός της γλώσσας Java", 1);
 
-        BookLibrary patraLibrary = new BookLibrary("Υπατίας, Πανεπιστημιούπολη Πατρών", "bibliothiki@upatras.gr", "2610 96962");
+        BookLibrary patraLibrary = new BookLibrary("Βιβλιοθήκη & Κέντρο Πληροφόρησης - Πανεπιστήμιο Πατρών", "Υπατίας, Πανεπιστημιούπολη Πατρών", "bibliothiki@upatras.gr", "2610 96962");
 
         patraLibrary.addBook(book1);
         patraLibrary.addBook(book2);
         patraLibrary.addBook(book3);
         patraLibrary.addBook(book4);
 
-        //addNewBook(patraLibrary);
-        //searchBook(patraLibrary);
+        /* Δανεισμός βιβλίου για ανάγκες testing της receiveBook */
+        BookToReceive rcvbook = new BookToReceive(book3, ceidStudent);
+        patraLibrary.getBooksToReceive().add(rcvbook);
+        System.out.println("\nΤο PIN σου: " + rcvbook.getBookToReceivePin().getPINnumber());
+        System.out.println("Πρέπει να το παραλάβεις μέχρι: " + rcvbook.getPickupDateExpired());
 
+        /* Παραλαβή βιβλίου για ανάγκες testing της returnBook */
+        BookToReturn returnbook = new BookToReturn(book2, ceidStudent);
+        patraLibrary.getBooksToReturn().add(returnbook);
+        System.out.println("\nΤο PIN επιστροφής: " + returnbook.getBookToReturnPin().getPINnumber());
+        System.out.println("Πρέπει να το επιστρέψει μέχρι: " + returnbook.getReturnDate());
 
         Scanner input = new Scanner(System.in);
         int userChoice;
@@ -44,8 +52,8 @@ public class UniLib {
 
                 case 2:
                     try {
-                        int logintype = userLogin();
-                        if (logintype == 1) {
+                        ArrayList<Integer> logintype = userLogin();
+                        if (logintype.get(0) == 1) {
                             // ΧΡΗΣΤΗΣ
                             Scanner choice = new Scanner(System.in);
                             int userMenuChoice;
@@ -57,7 +65,13 @@ public class UniLib {
                                 switch (userMenuChoice) {
 
                                     case 1:
-                                        searchBook(patraLibrary);
+                                        ArrayList<Book> results = searchBook(patraLibrary);
+                                        System.out.print("Επίλεξε βιβλίο για δανεισμό: ");
+                                        Scanner input_book = new Scanner(System.in);
+                                        int book = input_book.nextInt();
+                                        try {
+                                            borrowBook(results.get(book-1), useraccountlist.get(logintype.get(1)), patraLibrary);
+                                        } catch (FailBorrowException e) {}
                                         break;
 
                                     case 2:
@@ -70,14 +84,16 @@ public class UniLib {
                                 }
                             } while (userMenuChoice != 2);
                         }
-                        if (logintype == 2) {
+                        if (logintype.get(0) == 2) {
                             // ΔΙΑΧΕΙΡΙΣΤΗΣ
                             Scanner choice = new Scanner(System.in);
                             int adminMenuChoice;
                             do {
                                 System.out.println("\n1. Αναζήτηση");
                                 System.out.println("2. Προσθήκη νέου βιβλίου");
-                                System.out.println("3. Αποσύνδεση");
+                                System.out.println("3. Παραλαβή βιβλίου");
+                                System.out.println("4. Επιστροφή βιβλίου");
+                                System.out.println("5. Αποσύνδεση");
                                 System.out.print("Επίλεξε: ");
                                 adminMenuChoice = choice.nextInt();
                                 switch (adminMenuChoice) {
@@ -91,6 +107,22 @@ public class UniLib {
                                         break;
 
                                     case 3:
+                                        try {
+                                            receiveBook(patraLibrary);
+                                        } catch (InvalidPinException e) {}
+                                        finally {
+                                            break;
+                                        }
+
+                                    case 4:
+                                        try {
+                                            returnBook(patraLibrary);
+                                        } catch (InvalidPinException e) {}
+                                        finally {
+                                            break;
+                                        }
+
+                                    case 5:
                                         System.out.println("Επιτυχής αποσύνδεση.");
                                         System.exit(0);
                                         break;
@@ -98,7 +130,7 @@ public class UniLib {
                                     default:
                                         System.out.println("Το " + userChoice + " δεν είναι έγκυρη επιλογή! Παρακαλώ, επίλεξε ξανά!");
                                 }
-                            } while (adminMenuChoice != 3);
+                            } while (adminMenuChoice != 5);
                         }
                     } catch (CannotLoginException e) {}
                     break;
@@ -120,24 +152,84 @@ public class UniLib {
 //        catch(FailBorrowException e) {}
     }
 
-    public static void borrowBook(Book book, UserAccount account) throws FailBorrowException {
+    public static void borrowBook(Book book, UserAccount account, BookLibrary library) throws FailBorrowException {
         if (account.getBorrowBooks() < 5 && book.getBook_copies() > 0) {
-            
-            BorrowedBook mybook1 = new BorrowedBook(book, account.getUser());
+            BookToReceive receivebook = new BookToReceive(book, account);
+            library.getBooksToReceive().add(receivebook);
+            System.out.println("Επιτυχής δανεισμός");
+            System.out.println("\nΤο PIN σου: " + receivebook.getBookToReceivePin().getPINnumber());
+            System.out.println("Πρέπει να το παραλάβεις μέχρι: " + receivebook.getPickupDateExpired());
+            //BorrowedBook mybook1 = new BorrowedBook(book, account.getUser());
 
-            book.aBookIsBorrowed();             //book copy reduced by 1
-            account.newBorrowedBook(mybook1);   //borrowed book added to account list - borrow limit reduced by 1
+            //book.aBookIsBorrowed();             //book copy reduced by 1
+            //account.newBorrowedBook(mybook1);   //borrowed book added to account list - borrow limit reduced by 1
 
         }
-        else
-            throw new FailBorrowException("You can't borrow");
-
+        else if (account.getBorrowBooks() == 5) {
+            throw new FailBorrowException("Η διαδικασία δανεισμού απέτυχε.\nΠρέπει να επιστρέψετε κάποιο βιβλίο για να δανειστείτε κάποιο νέο.");
+        }
+        else if (book.getBook_copies() == 0) {
+            System.out.println("Το βιβλίο δεν είναι διαθέσιμο προς το παρον.\nΠροστέθηκε στη wish list σας.");
+            account.getWishList().addBook(book);
+        }
     }
 
-    public static void returnBook(BorrowedBook book, UserAccount account) {
+    public static void receiveBook(BookLibrary library) throws InvalidPinException {
+        System.out.print("Εισήγαγε PIN παραλαβής βιβλίου: ");
+        Scanner input = new Scanner(System.in);
+        String pin = input.nextLine();
+        boolean validPinFlag = false;
+
+        for (int i = 0; i < library.getBooksToReceive().size(); i++) {
+            if (library.getBooksToReceive().get(i).getBookToReceivePin().getPINnumber().equals(pin)) {
+                validPinFlag = true;
+                System.out.println("\nΈγκυρο PIN");
+                BorrowedBook mybook = new BorrowedBook(library.getBooksToReceive().get(i), library.getBooksToReceive().get(i).getUser()); //new BorrowedBook
+                library.getBooksToReceive().get(i).getUser().newBorrowedBook(mybook);
+                BookToReturn returnbook = new BookToReturn(library.getBooksToReceive().get(i), library.getBooksToReceive().get(i).getUser());
+                library.getBooksToReturn().add(returnbook);
+                library.getBooksToReceive().remove(i);
+                System.out.println("Παραλαβή βιβλίου ολοκληρώθηκε.");
+                break;
+            }
+        }
+        if (validPinFlag == false) {
+            throw new InvalidPinException("\nΜη αποδεκτό PIN");
+        }
+    }
+
+    public static void returnBook(BookLibrary library) throws InvalidPinException {
+        System.out.print("Εισήγαγε PIN επιστροφής βιβλίου: ");
+        Scanner input = new Scanner(System.in);
+        String pin = input.nextLine();
+        boolean validPinFlag = false;
+
+        for (int i = 0; i < library.getBooksToReturn().size(); i++) {
+            if (library.getBooksToReturn().get(i).getBookToReturnPin().getPINnumber().equals(pin)) {
+                validPinFlag = true;
+                System.out.println("\nΈγκυρο PIN");
+                library.getBooksToReturn().get(i).aBookIsReturned(); //book copy added by 1
+                //borrowed book removed from account list - borrow limited by 1
+                for (int j = 0; j < library.getBooksToReturn().get(i).getUser().getMyBooks().size(); j++) {
+                    if (library.getBooksToReturn().get(i).getUser().getMyBooks().get(j).getTitle() == library.getBooksToReturn().get(i).getTitle()) {
+                        library.getBooksToReturn().get(i).getUser().newReturnedBook(library.getBooksToReturn().get(i).getUser().getMyBooks().get(j));
+                        break;
+                    }
+                }
+                library.getBooksToReturn().remove(i); //remove BookToReturn
+                System.out.println("Επιστροφή βιβλίου ολοκληρώθηκε.");
+                break;
+            }
+        }
+        if (validPinFlag == false) {
+            throw new InvalidPinException("Μη αποδεκτό PIN");
+        }
+    }
+
+    /*public static void returnBook(BorrowedBook book, UserAccount account) {
         book.aBookIsReturned();                 //book copy added by 1
         account.newReturnedBook(book);          //borrowed book removed from account list - borrow limited added by 1
-    }
+    }*/
 
     public static int registerUser() throws AlreadyUsedAccountException {
         Scanner input = new Scanner(System.in);
@@ -200,7 +292,7 @@ public class UniLib {
         return choice;
     }
 
-    public static int userLogin() throws CannotLoginException {
+    public static ArrayList<Integer> userLogin() throws CannotLoginException {
         System.out.println("Σύνδεση");
         System.out.println("=============================================");
 
@@ -212,30 +304,29 @@ public class UniLib {
         System.out.print("\nPassword: ");
         String password = input_password.nextLine();
 
-        //boolean loginFlag = false;
+        ArrayList<Integer> loginResult = new ArrayList<Integer>();
 
         for (int i = 0; i < useraccountlist.size(); i++) {
             if (email.equals(useraccountlist.get(i).getUser().getEmail()) && password.equals(useraccountlist.get(i).getUser().getPassword())) {
                 System.out.println("\nΕπιτυχής σύνδεση χρήστη!");
-                //loginFlag = true;
-                return 1;
+                loginResult.add(1);
+                loginResult.add(i);
+                return loginResult;
             }
         }
 
         for (int i = 0; i < adminlist.size(); i++) {
             if (email.equals(adminlist.get(i).getEmail()) && password.equals(adminlist.get(i).getPassword())) {
                 System.out.println("\nΕπιτυχής σύνδεση διαχειριστή!");
-                //loginFlag = true;
-                return 2;
+                loginResult.add(2);
+                loginResult.add(i);
+                return loginResult;
             }
         }
-
-        //if (loginFlag == false) {
-            throw new CannotLoginException("\nΑποτυχία σύνδεσης");
-        //}
+        throw new CannotLoginException("\nΑποτυχία σύνδεσης");
     }
 
-    public static void searchBook(BookLibrary library) {
+    public static ArrayList<Book> searchBook(BookLibrary library) {
         Scanner input = new Scanner(System.in);
         System.out.print("Εισήγαγε λήμμα αναζήτησης: ");
         String lemma = input.nextLine();
@@ -272,9 +363,11 @@ public class UniLib {
             System.out.println("=============================================");
 
             for (int i = 0; i < results.size(); i++) {
-                System.out.println(results.get(i).getTitle());
+                System.out.println(i+1 + ". " + results.get(i).getTitle());
             }
+            System.out.println("=============================================");
         }
+        return results;
     }
 
     public static void addNewBook(BookLibrary library) {

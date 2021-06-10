@@ -2,12 +2,10 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class RewardingPoints {
-    private int points;
+    private int points = 10;
     private int allpoints;
 
-    public RewardingPoints(int points) {
-        this.points = points;
-    }
+    public RewardingPoints() {}
 
     public int getPoints() {
         return points;

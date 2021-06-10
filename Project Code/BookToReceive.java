@@ -1,37 +1,32 @@
 import java.util.*;
 
-class BookToReceive extends Book
-{
-    private User user;
+public class BookToReceive extends Book {
+    private UserAccount user;
     private Date pickup_date_expired;
     private PIN bookToreceive_pin;
 
-    public BookToReceive(Book book, User user)
-    {
+    public BookToReceive(Book book, UserAccount user) {
         super(book.getTitle(), book.getCategory(), book.getAuthor(), book.getPublishingHouse(), book.getISBN(), book.getDetails(), book.getBook_copies());
         this.user = user;
+        this.bookToreceive_pin = new PIN();
 
-        //this.bookToreceive_pin = PIN.generator_PIN();
-
-        this.pickup_date_expired = new Date();
-
+        // Αυτόματος ορισμός ημερομηνίας λήξης παραλαβής του βιβλίου 7 μέρες μετά.
+        pickup_date_expired = new Date();
         Calendar c = Calendar.getInstance();
-        
+        c.setTime(pickup_date_expired);
+        c.add(Calendar.DATE, 7);
         this.pickup_date_expired = c.getTime();
     }
 
-        public User getUser(){
-            return user;
-        }
+    public UserAccount getUser() {
+        return user;
+    }
 
-        public Date getPickupDateExpired()
-        {
-            return pickup_date_expired;
-        }
+    public Date getPickupDateExpired() {
+        return pickup_date_expired;
+    }
 
-        public PIN getBookToReceivePin()
-        {
-            return bookToreceive_pin;
-        }
-
+    public PIN getBookToReceivePin() {
+        return bookToreceive_pin;
+    }
 }

@@ -1,26 +1,22 @@
+import java.security.SecureRandom;
 import java.util.*;
 
-class PIN
-{
-    private int PIN_number;
+public class PIN {
+    private String PIN_number;
     private Date PIN_expire_date;
 
     public PIN()
     {
-        Date d = new Date();
-        //this.PIN_number = ThreadLocalRandom.current().nextInt();
-        
+        this.PIN_number = getPIN();
+
         this.PIN_expire_date= new Date();
 
-
         Calendar c = Calendar.getInstance();
-    
-        this.PIN_expire_date = c.getTime(); 
 
-      }
-    
+        this.PIN_expire_date = c.getTime();
+    }
 
-    public int getPINnumber(){
+    public String getPINnumber(){
         return PIN_number;
     }
 
@@ -29,4 +25,19 @@ class PIN
         return PIN_expire_date;
     }
 
+
+    public String getPIN()
+    {
+        String numbers = "1234567890";
+        StringBuilder pin = new StringBuilder();
+        SecureRandom srnd = new SecureRandom();
+        while(pin.length() < 12)
+        {
+            int index = (int)(srnd.nextFloat() * numbers.length());
+            pin.append(numbers.charAt(index));
+        }
+
+        String pinStr = pin.toString();
+        return pinStr;
+    }
 }

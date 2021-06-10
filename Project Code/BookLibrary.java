@@ -7,12 +7,15 @@ public class BookLibrary {
 	private String address;
 	private String telephone;
 	private ArrayList<Book> library = new ArrayList<Book>();
+	private ArrayList<BookToReceive> booksToReceive = new ArrayList<BookToReceive>();
+	private ArrayList<BookToReturn> booksToReturn = new ArrayList<BookToReturn>();
 
 	public String getAddress(){
 		return address;
 	}
   
-	public BookLibrary (String parAddress, String parEmail, String parTel) {
+	public BookLibrary (String name, String parAddress, String parEmail, String parTel) {
+		libraryName = name;
 		address = parAddress;
 		email = parEmail;
 		telephone = parTel;
@@ -20,6 +23,14 @@ public class BookLibrary {
                      
 	public String getTelephone(){
 		return telephone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getLibraryName() {
+		return libraryName;
 	}
 
 	public void addBook(Book b) {
@@ -32,6 +43,14 @@ public class BookLibrary {
 
 	public ArrayList<Book> getLibrary() {
 		return library;
+	}
+
+	public ArrayList<BookToReceive> getBooksToReceive() {
+		return booksToReceive;
+	}
+
+	public ArrayList<BookToReturn> getBooksToReturn() {
+		return booksToReturn;
 	}
 
 	public ArrayList<Book> getBooksByTitle(String book_title) throws SearchWarningException {

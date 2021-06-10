@@ -3,10 +3,10 @@ import java.text.SimpleDateFormat;
 
 public class BorrowedBook extends Book {
 
-    private User user;
+    private UserAccount user;
     private Date borrow_start_date, borrow_expire_date;
 
-    public BorrowedBook(Book book, User user) {
+    public BorrowedBook(Book book, UserAccount user) {
         super(book.getTitle(), book.getCategory(), book.getAuthor(), book.getPublishingHouse(), book.getISBN(), book.getDetails(), book.getBook_copies());
         this.user = user;
         this.borrow_start_date = new Date();
@@ -18,11 +18,7 @@ public class BorrowedBook extends Book {
         this.borrow_expire_date = c.getTime();
     }
 
-//    public String getIdBook(){
-//        return idBook;
-//    }
-
-    public User getUser() {
+    public UserAccount getUser() {
         return user;
     }
 
