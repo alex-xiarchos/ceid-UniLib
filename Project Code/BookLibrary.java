@@ -14,7 +14,8 @@ public class BookLibrary {
 		return address;
 	}
   
-	public BookLibrary (String parAddress, String parEmail, String parTel) {
+	public BookLibrary (String name, String parAddress, String parEmail, String parTel) {
+		libraryName = name;
 		address = parAddress;
 		email = parEmail;
 		telephone = parTel;
@@ -22,6 +23,14 @@ public class BookLibrary {
                      
 	public String getTelephone(){
 		return telephone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getLibraryName() {
+		return libraryName;
 	}
 
 	public void addBook(Book b) {

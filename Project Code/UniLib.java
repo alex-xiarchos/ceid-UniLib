@@ -3,7 +3,7 @@ public class UniLib {
     private static ArrayList<UserAccount> useraccountlist = new ArrayList<UserAccount>();
     private static ArrayList<Administrator> adminlist = new ArrayList<Administrator>();
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Administrator admin = new Administrator("Ρουμελιώτης Κωνσταντίνος", "roumeliotis@upatras.gr", "roum12");
         adminlist.add(admin);
         String[] array = new String[] {"Νικηφόρος Παπαγεωργίου", "st1059633@ceid.upatras.gr", "nik23", String.valueOf(1059633), "CEID", String.valueOf(4), String.valueOf(1)};
@@ -15,7 +15,7 @@ public class UniLib {
         Book book3 = new Book("Βασικές αρχές Τεχνολογίας Λογισμικού", "Πληροφορική", "Ian Sommerville", "Κλειδάριθμος", "978-960-461-220-8", "Βιβλίο Τεχνολογίας Λογισμικού", 5);
         Book book4 = new Book("Εισαγωγή στην Java", "Πληροφορική", "Γιώργος Λιακέας", "Κλειδάριθμος", "978-960-461-169-0", "Ένας ολοκληρωμένος και εύχρηστος οδηγός της γλώσσας Java", 1);
 
-        BookLibrary patraLibrary = new BookLibrary("Υπατίας, Πανεπιστημιούπολη Πατρών", "bibliothiki@upatras.gr", "2610 96962");
+        BookLibrary patraLibrary = new BookLibrary("Βιβλιοθήκη & Κέντρο Πληροφόρησης - Πανεπιστήμιο Πατρών", "Υπατίας, Πανεπιστημιούπολη Πατρών", "bibliothiki@upatras.gr", "2610 96962");
 
         patraLibrary.addBook(book1);
         patraLibrary.addBook(book2);
