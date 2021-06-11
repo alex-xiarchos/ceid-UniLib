@@ -139,38 +139,22 @@ public class UniLib {
                     System.out.println("Το " + userChoice + " δεν είναι έγκυρη επιλογή! Παρακαλώ, επίλεξε ξανά!");
             }
         } while (true);
-
-
-/*        for (int i = 0; i < useraccountlist.size(); i++) {1
-            System.out.println(useraccountlist.get(i).getUser().getName());
-        }
-*/
-
-//        try {
-//            borrowBook(book2, account);
-//        }
-//        catch(FailBorrowException e) {}
     }
 
     public static void borrowBook(Book book, UserAccount account, BookLibrary library) throws FailBorrowException {
         if (account.getBorrowBooks() < 5 && book.getBook_copies() > 0) {
-            BookToReceive receivebook = new BookToReceive(book, account);
-            library.getBooksToReceive().add(receivebook);
+            BookToReceive receivebook = new BookToReceive(book, account); //Δημιουργία βιβλίου προς παραλαβή
+            library.getBooksToReceive().add(receivebook); //προσθήκη βιβλίου στη λίστα παραλαβών της βιβλιοθήκης
             System.out.println("Επιτυχής δανεισμός");
             System.out.println("\nΤο PIN σου: " + receivebook.getBookToReceivePin().getPINnumber());
             System.out.println("Πρέπει να το παραλάβεις μέχρι: " + receivebook.getPickupDateExpired());
-            //BorrowedBook mybook1 = new BorrowedBook(book, account.getUser());
-
-            //book.aBookIsBorrowed();             //book copy reduced by 1
-            //account.newBorrowedBook(mybook1);   //borrowed book added to account list - borrow limit reduced by 1
-
         }
         else if (account.getBorrowBooks() == 5) {
             throw new FailBorrowException("Η διαδικασία δανεισμού απέτυχε.\nΠρέπει να επιστρέψετε κάποιο βιβλίο για να δανειστείτε κάποιο νέο.");
         }
         else if (book.getBook_copies() == 0) {
             System.out.println("Το βιβλίο δεν είναι διαθέσιμο προς το παρον.\nΠροστέθηκε στη wish list σας.");
-            account.getWishList().addBook(book);
+            account.getWishList().addBook(book); //Προσθήκη βιβλίου στη wishlist
         }
     }
 
@@ -186,9 +170,9 @@ public class UniLib {
                 System.out.println("\nΈγκυρο PIN");
                 BorrowedBook mybook = new BorrowedBook(library.getBooksToReceive().get(i), library.getBooksToReceive().get(i).getUser()); //new BorrowedBook
                 library.getBooksToReceive().get(i).getUser().newBorrowedBook(mybook);
-                BookToReturn returnbook = new BookToReturn(library.getBooksToReceive().get(i), library.getBooksToReceive().get(i).getUser());
-                library.getBooksToReturn().add(returnbook);
-                library.getBooksToReceive().remove(i);
+                BookToReturn returnbook = new BookToReturn(library.getBooksToReceive().get(i), library.getBooksToReceive().get(i).getUser()); //new BookToReturn
+                library.getBooksToReturn().add(returnbook); //προσθήκη βιβλίου στη λίστα επιστροφών της βιβλιοθήκης
+                library.getBooksToReceive().remove(i); //αφαίρεση βιβλίου από τη λίστα παραλαβών
                 System.out.println("Παραλαβή βιβλίου ολοκληρώθηκε.");
                 break;
             }
@@ -216,7 +200,7 @@ public class UniLib {
                         break;
                     }
                 }
-                library.getBooksToReturn().remove(i); //remove BookToReturn
+                library.getBooksToReturn().remove(i); //αφαίρεση βιβλίου από τη λίστα επιστροφών
                 System.out.println("Επιστροφή βιβλίου ολοκληρώθηκε.");
                 break;
             }
@@ -225,11 +209,6 @@ public class UniLib {
             throw new InvalidPinException("Μη αποδεκτό PIN");
         }
     }
-
-    /*public static void returnBook(BorrowedBook book, UserAccount account) {
-        book.aBookIsReturned();                 //book copy added by 1
-        account.newReturnedBook(book);          //borrowed book removed from account list - borrow limited added by 1
-    }*/
 
     public static int registerUser() throws AlreadyUsedAccountException {
         Scanner input = new Scanner(System.in);

@@ -25,7 +25,7 @@ public class PIN {
         return PIN_expire_date;
     }
 
-
+    /* Μέθοδος που παράγει ένα 12ψηφιο String που αποτελεί τον αριθμό PIN */
     public String getPIN()
     {
         String numbers = "1234567890";
